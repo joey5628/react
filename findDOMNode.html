@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>findDOMNode</title>
+    <script src="build/react.js"></script>
+    <script src="build/JSXTransformer.js"></script>
+</head>
+<body>
+	
+	<script type="text/jsx">
+		var MyComponent = React.createClass({
+			handleClick: function(){
+				//React.findDOMNode(this.refs.myText).focus();
+				console.log(this.refs.myText.getDOMNode());
+				console.log(React.findDOMNode(this.refs.myText));
+				this.refs.myText.getDOMNode().focus();
+			},
+			render: function(){
+				return (
+					<div>
+						<input type="text" ref="myText"/>
+						<input type="button" value="Focus the text input" onClick={this.handleClick} />
+					</div>
+				);
+			}	
+		});
+
+		React.render(
+			<MyComponent></MyComponent>,
+			document.body
+		);
+	</script>
+</body>
+</html>

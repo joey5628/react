@@ -5,11 +5,11 @@
 		CommentForm
 */	
 
-var data = [
+/*var data = [
 	{author: "zhangyi", text: "-This is one comment"},
 	{author: "jiangli", text: "-This- is *author* comment"}
 ];
-
+*/
 var converter = new Showdown.converter();// makedown
 
 var Comment = React.createClass({	//dangerouslySetInnerHTML 避免XSS攻击
@@ -91,8 +91,14 @@ var CommentBox = React.createClass({
 	getInitialState: function(){
 		return {data: []}
 	},
+	componentWillMount: function(){
+		console.log('componentWillMount----------'+this.isMounted());
+	},
 	componentDidMount: function(){
-		this.loadCommentsFromServer();
+		console.log('componentDidMount----------'+this.isMounted());
+		if(this.isMounted()){
+			this.loadCommentsFromServer();
+		}
 		//setInterval(this.loadCommentsFromServer, this.props.pollInterval)
 	},
 	render: function(){
@@ -109,4 +115,18 @@ var CommentBox = React.createClass({
 React.render(
 	<CommentBox url="src/comments.json" pollInterval={2000}/>,
 	document.getElementById('container')
-);
+);/*
+
+
+var TestInput = React.createClass({
+	render: function(){
+		return (
+			<input type="text" value="111" placeholder="Your name"/>
+		);
+	}
+});
+
+React.render(
+	<TestInput></TestInput>,
+	document.getElementById('container2')
+);*/
